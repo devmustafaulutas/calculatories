@@ -1,169 +1,151 @@
-import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { blogPosts, getBlogPostBySlug } from "@/lib/blog";
-import { Breadcrumb } from "@/components/breadcrumb";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
-import { Calendar, Clock, ArrowLeft, ArrowRight } from "lucide-react";
+import { PortableTextRenderer } from "@/components/portable-text/PortableTextRenderer";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { Byline } from "@/components/seo/Byline";
+import { FaqSection } from "@/components/seo/FaqSection";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { LastUpdated } from "@/components/seo/LastUpdated";
+import { InContentAd } from "@/components/ads/InContentAd";
+import { fetchPostBySlug, fetchPostSlugs } from "@/lib/blog/sanity";
+import { buildMetadata } from "@/lib/seo";
+import { article, breadcrumb, faqPage, person } from "@/lib/schema";
+import { resolveOgImageUrl } from "@/sanity/lib/og-image";
+import { blogPath, blogTagPath, canonicalUrl } from "@/lib/urls";
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
-  return blogPosts.map((post) => ({
-    slug: post.slug,
-  }));
+  const slugs = await fetchPostSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: BlogPostPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: BlogPostPageProps) {
   const { slug } = await params;
-  const post = getBlogPostBySlug(slug);
+  const post = await fetchPostBySlug(slug);
 
-  if (!post) {
-    return {
-      title: "Post Not Found",
-    };
-  }
+  if (!post || post.noindex) return { title: "Post Not Found" };
 
-  return {
-    title: post.title,
-    description: post.excerpt,
-    openGraph: {
-      title: post.title,
-      description: post.excerpt,
-      type: "article",
-      publishedTime: post.date,
-      authors: [post.author],
-    },
-    alternates: {
-      canonical: `https://calculatories.com/blog/${post.slug}`,
-    },
-  };
+  const path = post.seo?.canonicalOverride
+    ? new URL(post.seo.canonicalOverride).pathname
+    : blogPath(slug);
+
+  const ogImage = resolveOgImageUrl(
+    post.seo?.ogImage as { asset?: { _ref: string } } | undefined,
+    post.heroImage as { asset?: { _ref: string } } | undefined,
+    `${blogPath(slug)}/opengraph-image`,
+    canonicalUrl,
+  );
+
+  return buildMetadata({
+    title: post.seo?.metaTitle ?? post.title,
+    description: post.seo?.metaDescription ?? post.description,
+    path,
+    canonicalOverride: post.seo?.canonicalOverride ?? undefined,
+    ogType: "article",
+    ogImage,
+    noindex: post.seo?.noindex ?? false,
+    publishedTime: post.publishedAt,
+    modifiedTime: post.updatedAt,
+    authors: [post.author?.name ?? "Calculatories"],
+    tags: post.tagTitles,
+  });
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
-  const post = getBlogPostBySlug(slug);
+  const post = await fetchPostBySlug(slug);
 
-  if (!post) {
-    notFound();
+  if (!post || post.noindex || !post.author) notFound();
+
+  const url = post.seo?.canonicalOverride ?? canonicalUrl(blogPath(slug));
+  const schemas: Record<string, unknown>[] = [
+    breadcrumb([
+      { label: "Blog", href: "/blog" },
+      { label: post.title },
+    ]),
+    person(post.author),
+    article({
+      title: post.title,
+      description: post.description,
+      url,
+      datePublished: post.publishedAt,
+      dateModified: post.updatedAt,
+      author: post.author,
+      reviewer: post.reviewer ?? undefined,
+    }),
+  ];
+
+  if (post.faq.length > 0) {
+    schemas.push(faqPage(post.faq));
   }
 
-  const relatedPosts = blogPosts
-    .filter((p) => p.slug !== post.slug && p.category === post.category)
-    .slice(0, 2);
-
   return (
-    <div className="py-8">
-      <div className="container mx-auto px-4">
-        <Breadcrumb
-          items={[{ label: "Blog", href: "/blog" }, { label: post.title }]}
-        />
+    <>
+      <JsonLd data={schemas} />
+      <article className="py-8">
+        <div className="container mx-auto px-4 max-w-3xl">
+          <Breadcrumbs
+            items={[
+              { label: "Blog", href: "/blog" },
+              { label: post.title },
+            ]}
+          />
 
-        <article className="max-w-3xl mx-auto">
           <header className="mb-8">
-            <Badge variant="secondary" className="mb-4">
-              {post.category}
-            </Badge>
-            <h1 className="text-3xl md:text-4xl font-bold mb-4">{post.title}</h1>
-            <div className="flex items-center gap-4 text-sm text-muted-foreground">
-              <span>{post.author}</span>
-              <div className="flex items-center gap-1">
-                <Calendar className="h-4 w-4" />
-                {new Date(post.date).toLocaleDateString("en-US", {
-                  month: "long",
-                  day: "numeric",
-                  year: "numeric",
-                })}
-              </div>
-              <div className="flex items-center gap-1">
-                <Clock className="h-4 w-4" />
-                {post.readTime}
-              </div>
+            <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
+              <Link
+                href={`/blog/category/${post.categorySlug}`}
+                className="hover:text-foreground"
+              >
+                {post.category}
+              </Link>
+              <span>·</span>
+              <span>{post.readTime}</span>
+            </div>
+            <h1 className="text-3xl md:text-4xl font-bold mb-4">
+              {post.title}
+            </h1>
+            <p className="text-lg text-muted-foreground">{post.description}</p>
+            <div className="mt-4">
+              <Byline
+                authorId={post.authorId}
+                reviewerId={post.reviewerId}
+                author={post.author}
+                reviewer={post.reviewer ?? undefined}
+              />
+              <LastUpdated date={post.updatedAt} />
             </div>
           </header>
 
-          <div className="prose prose-slate dark:prose-invert max-w-none mb-12">
-            <p className="lead">{post.excerpt}</p>
-
-            <h2>Introduction</h2>
-            <p>
-              This is a placeholder for the full blog post content. In a
-              production environment, this would be loaded from a CMS or
-              markdown files. The content would include detailed explanations,
-              examples, and practical advice related to the topic.
-            </p>
-
-            <h2>Key Points</h2>
-            <p>
-              Here we would cover the main points of the article, breaking down
-              complex concepts into easy-to-understand sections. Each section
-              would provide value to the reader and help them understand the
-              topic better.
-            </p>
-
-            <ul>
-              <li>First important point with detailed explanation</li>
-              <li>Second key concept to understand</li>
-              <li>Third practical tip for implementation</li>
-              <li>Fourth consideration for readers</li>
-            </ul>
-
-            <h2>Practical Application</h2>
-            <p>
-              We would include practical examples and step-by-step guides that
-              readers can follow. This section would reference our calculators
-              and show how to use them effectively.
-            </p>
-
-            <h2>Conclusion</h2>
-            <p>
-              A summary of the key takeaways and call-to-action encouraging
-              readers to use our calculators to apply what they have learned.
-            </p>
+          <div className="prose prose-neutral dark:prose-invert max-w-none">
+            <PortableTextRenderer value={post.body} />
           </div>
 
-          <div className="flex items-center justify-between border-t pt-8">
-            <Link
-              href="/blog"
-              className="flex items-center gap-2 text-primary hover:underline"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              Back to Blog
-            </Link>
-          </div>
-        </article>
+          <InContentAd />
 
-        {relatedPosts.length > 0 && (
-          <div className="max-w-3xl mx-auto mt-12">
-            <h2 className="text-2xl font-bold mb-6">Related Articles</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {relatedPosts.map((relatedPost) => (
-                <Link key={relatedPost.slug} href={`/blog/${relatedPost.slug}`}>
-                  <Card className="h-full hover:shadow-md transition-shadow group">
-                    <CardContent className="p-4">
-                      <Badge variant="outline" className="mb-2">
-                        {relatedPost.category}
-                      </Badge>
-                      <h3 className="font-semibold group-hover:text-primary transition-colors line-clamp-2">
-                        {relatedPost.title}
-                      </h3>
-                      <div className="flex items-center text-sm text-primary mt-2">
-                        Read More
-                        <ArrowRight className="h-3 w-3 ml-1 group-hover:translate-x-1 transition-transform" />
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Link>
-              ))}
+          <FaqSection faqs={post.faq} />
+
+          {post.tags.length > 0 && (
+            <div className="mt-8 pt-6 border-t">
+              <p className="text-sm font-medium mb-2">Tags</p>
+              <div className="flex flex-wrap gap-2">
+                {post.tags.map((tag, i) => (
+                  <Link
+                    key={tag}
+                    href={blogTagPath(tag)}
+                    className="text-sm px-3 py-1 bg-muted rounded-full hover:bg-muted/80"
+                  >
+                    {post.tagTitles[i] ?? tag}
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
-        )}
-      </div>
-    </div>
+          )}
+        </div>
+      </article>
+    </>
   );
 }

@@ -1,0 +1,36 @@
+---
+description: Rules for generating programmatic SEO pages (city/state/segment calculator variants). Apply when creating bulk location-based or segment-based calculator pages.
+alwaysApply: false
+---
+
+# Programmatic SEO pages
+
+Patterns:
+- `/finance/mortgage-calculator/new-york`
+- `/finance/loan-calculator/california`
+- `/health/bmi-calculator/adults`
+
+## Each generated page MUST have
+- A unique H1 that includes the city/state/segment name.
+- **Localized, unique content** — e.g. that city's median home price, cost of living,
+  state tax rate, average salary. Cite the source (US Census, BLS). Pages that are
+  near-identical with only a name swapped are thin content; do not ship those.
+- The same calculator widget.
+- A unique meta title + description (location included).
+- ≥3 internal links (to the base tool and to sibling locations).
+
+## Canonical — IMPORTANT
+- If the page has genuinely unique localized content, its canonical points to
+  **ITSELF**. Self-canonical is what lets Google index it — that is the entire point
+  of programmatic SEO.
+- Only canonical to the base tool if the page is a true near-duplicate with no
+  localized data (and prefer not to create such pages at all).
+- NOTE: this intentionally overrides the older project note that said "programmatic
+  canonical should point to the main tool" — that would de-index every location page
+  and defeat the strategy. Discuss before reverting.
+- Add every location page to `sitemap.xml`.
+
+## Data
+- Pull from a typed dataset (e.g. `data/locations.ts`), never hardcode numbers inline
+  per page. Keep figures current and dated, with the source noted.
+- Generate routes via `generateStaticParams`; keep build size in mind for large sets.

@@ -1,0 +1,955 @@
+[
+  {
+    "_type": "block",
+    "_key": "block-0-normal",
+    "style": "normal",
+    "markDefs": [
+      {
+        "_key": "mark-1",
+        "_type": "internalLink",
+        "href": "/finance/mortgage-calculator"
+      }
+    ],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "span-0",
+        "text": "Buying a home is the largest financial decision most Americans will ever make, and understanding your monthly mortgage payment is the first step toward making it confidently. This guide walks you through the standard amortization formula, shows you a worked example with real numbers, and points you to our free ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "span-2",
+        "text": "mortgage calculator",
+        "marks": [
+          "mark-1"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "span-2",
+        "text": " so you can model scenarios instantly.",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "block-1-h2",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "span-0",
+        "text": "Why Your Mortgage Payment Matters",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "block-2-normal",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "span-0",
+        "text": "Your monthly payment determines how much house you can afford, how much cash you keep for savings and emergencies, and how much interest you pay over the life of the loan. Lenders evaluate your debt-to-income ratio (DTI) — typically capping housing costs at 28% of gross monthly income — so knowing your payment before you shop prevents wasted time on homes outside your budget.",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "block-3-normal",
+    "style": "normal",
+    "markDefs": [
+      {
+        "_key": "cite-1",
+        "_type": "citation",
+        "label": "Consumer Financial Protection Bureau",
+        "url": "https://www.consumerfinance.gov/owning-a-home/"
+      }
+    ],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "span-0",
+        "text": "According to the ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "span-2",
+        "text": "Consumer Financial Protection Bureau",
+        "marks": [
+          "cite-1"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "span-2",
+        "text": ", comparing loan estimates from multiple lenders can save you thousands over a 30-year term. A mortgage calculator lets you do that comparison in minutes.",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "block-4-h2",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "span-0",
+        "text": "The Mortgage Payment Formula",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "block-5-normal",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "span-0",
+        "text": "The standard formula for a fixed-rate mortgage is:",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "block-6-normal",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "span-0",
+        "text": "M = P × [r(1+r)^n] / [(1+r)^n − 1]",
+        "marks": [
+          "strong"
+        ]
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "block-7-normal",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "span-0",
+        "text": "Where:",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "block-8-normal",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "span-0",
+        "text": "M",
+        "marks": [
+          "strong"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "span-1",
+        "text": " = Monthly payment",
+        "marks": []
+      }
+    ],
+    "listItem": "bullet",
+    "level": 1
+  },
+  {
+    "_type": "block",
+    "_key": "block-9-normal",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "span-0",
+        "text": "P",
+        "marks": [
+          "strong"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "span-1",
+        "text": " = Principal (home price minus down payment)",
+        "marks": []
+      }
+    ],
+    "listItem": "bullet",
+    "level": 1
+  },
+  {
+    "_type": "block",
+    "_key": "block-10-normal",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "span-0",
+        "text": "r",
+        "marks": [
+          "strong"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "span-1",
+        "text": " = Monthly interest rate (annual rate ÷ 12)",
+        "marks": []
+      }
+    ],
+    "listItem": "bullet",
+    "level": 1
+  },
+  {
+    "_type": "block",
+    "_key": "block-11-normal",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "span-0",
+        "text": "n",
+        "marks": [
+          "strong"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "span-1",
+        "text": " = Total number of payments (years × 12)",
+        "marks": []
+      }
+    ],
+    "listItem": "bullet",
+    "level": 1
+  },
+  {
+    "_type": "block",
+    "_key": "block-12-normal",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "span-0",
+        "text": "This formula produces a level monthly payment. In the early years, most of each payment goes to interest because the outstanding balance is highest. As you pay down principal, the interest portion shrinks and the principal portion grows.",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "block-13-h2",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "span-0",
+        "text": "Worked Example: $350,000 Home",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "block-14-normal",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "span-0",
+        "text": "Let us calculate a realistic scenario:",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "block-15-normal",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "span-0",
+        "text": "Home price: $350,000",
+        "marks": []
+      }
+    ],
+    "listItem": "bullet",
+    "level": 1
+  },
+  {
+    "_type": "block",
+    "_key": "block-16-normal",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "span-0",
+        "text": "Down payment: $70,000 (20%)",
+        "marks": []
+      }
+    ],
+    "listItem": "bullet",
+    "level": 1
+  },
+  {
+    "_type": "block",
+    "_key": "block-17-normal",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "span-0",
+        "text": "Interest rate: 6.5% per year",
+        "marks": []
+      }
+    ],
+    "listItem": "bullet",
+    "level": 1
+  },
+  {
+    "_type": "block",
+    "_key": "block-18-normal",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "span-0",
+        "text": "Loan term: 30 years",
+        "marks": []
+      }
+    ],
+    "listItem": "bullet",
+    "level": 1
+  },
+  {
+    "_type": "block",
+    "_key": "block-19-normal",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "span-0",
+        "text": "Step 1:",
+        "marks": [
+          "strong"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "span-1",
+        "text": " Principal = $350,000 − $70,000 = ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "span-2",
+        "text": "$280,000",
+        "marks": [
+          "strong"
+        ]
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "block-20-normal",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "span-0",
+        "text": "Step 2:",
+        "marks": [
+          "strong"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "span-1",
+        "text": " Monthly rate = 6.5% ÷ 12 = ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "span-2",
+        "text": "0.005417",
+        "marks": [
+          "strong"
+        ]
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "block-21-normal",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "span-0",
+        "text": "Step 3:",
+        "marks": [
+          "strong"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "span-1",
+        "text": " Number of payments = 30 × 12 = ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "span-2",
+        "text": "360",
+        "marks": [
+          "strong"
+        ]
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "block-22-normal",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "span-0",
+        "text": "Step 4:",
+        "marks": [
+          "strong"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "span-1",
+        "text": " Apply the formula → monthly payment ≈ ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "span-2",
+        "text": "$1,770",
+        "marks": [
+          "strong"
+        ]
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "block-23-normal",
+    "style": "normal",
+    "markDefs": [
+      {
+        "_key": "mark-1",
+        "_type": "internalLink",
+        "href": "/finance/mortgage-calculator"
+      }
+    ],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "span-0",
+        "text": "Over 360 payments, you would pay approximately $636,800 total, including roughly $356,800 in interest. Try these numbers in our ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "span-2",
+        "text": "mortgage calculator",
+        "marks": [
+          "mark-1"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "span-2",
+        "text": " to see the full amortization schedule.",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "block-24-h2",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "span-0",
+        "text": "Factors That Change Your Payment",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "block-25-normal",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "span-0",
+        "text": "Several variables shift your monthly cost:",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "block-26-normal",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "span-0",
+        "text": "Home price",
+        "marks": [
+          "strong"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "span-1",
+        "text": " — Higher price means a larger loan unless you increase your down payment proportionally.",
+        "marks": []
+      }
+    ],
+    "listItem": "number",
+    "level": 1
+  },
+  {
+    "_type": "block",
+    "_key": "block-27-normal",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "span-0",
+        "text": "Down payment",
+        "marks": [
+          "strong"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "span-1",
+        "text": " — Every extra dollar reduces principal and may eliminate PMI if you reach 20%.",
+        "marks": []
+      }
+    ],
+    "listItem": "number",
+    "level": 1
+  },
+  {
+    "_type": "block",
+    "_key": "block-28-normal",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "span-0",
+        "text": "Interest rate",
+        "marks": [
+          "strong"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "span-1",
+        "text": " — A 0.25% rate difference on a $280,000 loan can cost $15,000+ in extra interest over 30 years.",
+        "marks": []
+      }
+    ],
+    "listItem": "number",
+    "level": 1
+  },
+  {
+    "_type": "block",
+    "_key": "block-29-normal",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "span-0",
+        "text": "Loan term",
+        "marks": [
+          "strong"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "span-1",
+        "text": " — A 15-year loan costs more per month but far less in total interest.",
+        "marks": []
+      }
+    ],
+    "listItem": "number",
+    "level": 1
+  },
+  {
+    "_type": "block",
+    "_key": "block-30-normal",
+    "style": "normal",
+    "markDefs": [
+      {
+        "_key": "cite-1",
+        "_type": "citation",
+        "label": "Federal Reserve H.15 release",
+        "url": "https://www.federalreserve.gov/releases/h15/"
+      }
+    ],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "span-0",
+        "text": "The ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "span-2",
+        "text": "Federal Reserve H.15 release",
+        "marks": [
+          "cite-1"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "span-2",
+        "text": " publishes weekly average mortgage rates you can use as a benchmark.",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "block-31-h2",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "span-0",
+        "text": "Beyond Principal and Interest",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "block-32-normal",
+    "style": "normal",
+    "markDefs": [
+      {
+        "_key": "cite-1",
+        "_type": "citation",
+        "label": "US Census Bureau",
+        "url": "https://www.census.gov/programs-surveys/acs"
+      },
+      {
+        "_key": "mark-3",
+        "_type": "internalLink",
+        "href": "/finance/mortgage-calculator/new-york"
+      },
+      {
+        "_key": "mark-5",
+        "_type": "internalLink",
+        "href": "/finance/mortgage-calculator/california"
+      }
+    ],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "span-0",
+        "text": "Your lender may quote a payment that includes escrow for property taxes and homeowners insurance. These vary by location — the ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "span-2",
+        "text": "US Census Bureau",
+        "marks": [
+          "cite-1"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "span-2",
+        "text": " publishes state-level housing cost data. For localized estimates, see our calculators for ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "span-4",
+        "text": "New York",
+        "marks": [
+          "mark-3"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "span-4",
+        "text": " and ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "span-6",
+        "text": "California",
+        "marks": [
+          "mark-5"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "span-6",
+        "text": ".",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "block-33-h2",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "span-0",
+        "text": "Tips for First-Time Buyers",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "block-34-normal",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "span-0",
+        "text": "Get pre-approved",
+        "marks": [
+          "strong"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "span-1",
+        "text": " before house hunting so you know your rate and budget.",
+        "marks": []
+      }
+    ],
+    "listItem": "bullet",
+    "level": 1
+  },
+  {
+    "_type": "block",
+    "_key": "block-35-normal",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "span-0",
+        "text": "Compare at least three lenders",
+        "marks": [
+          "strong"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "span-1",
+        "text": " — rates and fees differ more than many buyers expect.",
+        "marks": []
+      }
+    ],
+    "listItem": "bullet",
+    "level": 1
+  },
+  {
+    "_type": "block",
+    "_key": "block-36-normal",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "span-0",
+        "text": "Model 15-year vs. 30-year",
+        "marks": [
+          "strong"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "span-1",
+        "text": " terms to understand the lifetime interest trade-off.",
+        "marks": []
+      }
+    ],
+    "listItem": "bullet",
+    "level": 1
+  },
+  {
+    "_type": "block",
+    "_key": "block-37-normal",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "span-0",
+        "text": "Budget for closing costs",
+        "marks": [
+          "strong"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "span-1",
+        "text": " — typically 2–5% of the home price on top of your down payment.",
+        "marks": []
+      }
+    ],
+    "listItem": "bullet",
+    "level": 1
+  },
+  {
+    "_type": "block",
+    "_key": "block-38-h2",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "span-0",
+        "text": "Next Steps",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "block-39-normal",
+    "style": "normal",
+    "markDefs": [
+      {
+        "_key": "mark-1",
+        "_type": "internalLink",
+        "href": "/finance/mortgage-calculator"
+      },
+      {
+        "_key": "mark-3",
+        "_type": "internalLink",
+        "href": "/finance"
+      },
+      {
+        "_key": "mark-5",
+        "_type": "internalLink",
+        "href": "/methodology"
+      }
+    ],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "span-0",
+        "text": "Use our free ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "span-2",
+        "text": "mortgage calculator",
+        "marks": [
+          "mark-1"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "span-2",
+        "text": " to run your own numbers, explore the ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "span-4",
+        "text": "Finance category",
+        "marks": [
+          "mark-3"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "span-4",
+        "text": " for related tools, and read our ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "span-6",
+        "text": "methodology",
+        "marks": [
+          "mark-5"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "span-6",
+        "text": " page to understand how we source and verify the data behind our calculators.",
+        "marks": []
+      }
+    ]
+  }
+]

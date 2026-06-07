@@ -1,129 +1,123 @@
-import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import {
-  getCategoryBySlug,
-  getCalculatorsByCategory,
-  categories,
-} from "@/lib/calculators";
-import { Breadcrumb } from "@/components/breadcrumb";
+import { ArrowRight } from "lucide-react";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { Card, CardContent } from "@/components/ui/card";
-import {
-  Home,
-  TrendingUp,
-  Scale,
-  PiggyBank,
-  Flame,
-  Calculator,
-  Globe,
-  ArrowRight,
-} from "lucide-react";
-
-const iconMap: Record<string, React.ReactNode> = {
-  Home: <Home className="h-6 w-6" />,
-  TrendingUp: <TrendingUp className="h-6 w-6" />,
-  Scale: <Scale className="h-6 w-6" />,
-  PiggyBank: <PiggyBank className="h-6 w-6" />,
-  Flame: <Flame className="h-6 w-6" />,
-  Calculator: <Calculator className="h-6 w-6" />,
-  Globe: <Globe className="h-6 w-6" />,
-};
+import { getAllCategories, getCategory } from "@/lib/categories";
+import { buildMetadata } from "@/lib/seo";
+import { breadcrumb, collectionPage } from "@/lib/schema";
+import { getLiveToolsByCategory } from "@/lib/tools";
+import { canonicalUrl, categoryPath, toolPath } from "@/lib/urls";
 
 interface CategoryPageProps {
   params: Promise<{ category: string }>;
 }
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
-  return categories.map((cat) => ({
-    category: cat.slug,
-  }));
+  return getAllCategories().map((cat) => ({ category: cat.slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: CategoryPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: CategoryPageProps) {
   const { category } = await params;
-  const cat = getCategoryBySlug(category);
+  const cat = getCategory(category);
 
-  if (!cat) {
-    return {
-      title: "Category Not Found",
-    };
-  }
+  if (!cat) return { title: "Category Not Found" };
 
-  return {
-    title: `${cat.name} Calculators - Free Online Tools`,
-    description: cat.description,
-    openGraph: {
-      title: `${cat.name} Calculators | Calculatories`,
-      description: cat.description,
-      url: `https://calculatories.com/${cat.slug}`,
-    },
-    alternates: {
-      canonical: `https://calculatories.com/${cat.slug}`,
-    },
-  };
+  return buildMetadata({
+    title: cat.seo.title,
+    description: cat.seo.description,
+    path: categoryPath(category),
+    ogImage: `${categoryPath(category)}/opengraph-image`,
+  });
 }
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
   const { category } = await params;
-  const cat = getCategoryBySlug(category);
+  const cat = getCategory(category);
 
-  if (!cat) {
-    notFound();
-  }
+  if (!cat) notFound();
 
-  const calculators = getCalculatorsByCategory(category);
+  const tools = getLiveToolsByCategory(category);
+  const path = categoryPath(category);
 
   return (
-    <div className="py-8">
-      <div className="container mx-auto px-4">
-        <Breadcrumb items={[{ label: cat.name }]} />
+    <>
+      <JsonLd
+        data={[
+          breadcrumb([{ label: cat.name }]),
+          collectionPage({
+            name: cat.name,
+            description: cat.description,
+            url: canonicalUrl(path),
+          }),
+        ]}
+      />
+      <div className="py-8">
+        <div className="container mx-auto px-4">
+          <Breadcrumbs items={[{ label: cat.name }]} />
 
-        <div className="mb-12">
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">
-            {cat.name} Calculators
-          </h1>
-          <p className="text-lg text-muted-foreground max-w-3xl">
-            {cat.description}
+          <h1 className="text-3xl md:text-4xl font-bold mb-4">{cat.name}</h1>
+          <p className="text-lg text-muted-foreground mb-8 max-w-3xl">
+            {cat.intro}
           </p>
-        </div>
 
-        {calculators.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {calculators.map((calc) => (
-              <Link
-                key={calc.slug}
-                href={`/${calc.categorySlug}/${calc.slug}`}
-              >
-                <Card className="h-full hover:shadow-lg transition-all hover:-translate-y-1 group">
-                  <CardContent className="p-6">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary mb-4">
-                      {iconMap[calc.icon] || <Calculator className="h-6 w-6" />}
-                    </div>
-                    <h2 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
-                      {calc.name}
-                    </h2>
-                    <p className="text-sm text-muted-foreground mb-4">
-                      {calc.shortDescription}
-                    </p>
-                    <div className="flex items-center text-sm text-primary font-medium">
-                      Use Calculator
-                      <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
-            ))}
-          </div>
-        ) : (
-          <div className="text-center py-12">
+          {tools.length > 0 ? (
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {tools.map((tool) => (
+                <Link
+                  key={tool.slug}
+                  href={toolPath(category, tool.slug)}
+                  className="group"
+                >
+                  <Card className="h-full transition-colors hover:border-primary/50">
+                    <CardContent className="p-6">
+                      <h2 className="text-xl font-semibold group-hover:text-primary transition-colors">
+                        {tool.name}
+                      </h2>
+                      <p className="text-muted-foreground mt-2">
+                        {tool.shortDescription}
+                      </p>
+                      <span className="inline-flex items-center gap-1 text-sm text-primary mt-4">
+                        Use calculator
+                        <ArrowRight className="h-3 w-3" />
+                      </span>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+          ) : (
             <p className="text-muted-foreground">
-              No calculators available in this category yet.
+              Calculators in this category are coming soon. Browse our{" "}
+              <Link href="/" className="text-primary hover:underline">
+                homepage
+              </Link>{" "}
+              for available tools.
             </p>
+          )}
+
+          <div className="mt-12">
+            <h2 className="text-xl font-semibold mb-4">Browse Other Categories</h2>
+            <ul className="flex flex-wrap gap-3">
+              {getAllCategories()
+                .filter((c) => c.slug !== category)
+                .map((c) => (
+                  <li key={c.slug}>
+                    <Link
+                      href={categoryPath(c.slug)}
+                      className="text-sm text-primary hover:underline"
+                    >
+                      {c.name}
+                    </Link>
+                  </li>
+                ))}
+            </ul>
           </div>
-        )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

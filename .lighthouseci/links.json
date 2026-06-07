@@ -1,0 +1,7 @@
+{
+  "http://localhost:3000/": "https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1780795080497-4740.report.html",
+  "http://localhost:3000/finance/mortgage-calculator": "https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1780795081622-90927.report.html",
+  "http://localhost:3000/health/bmi-calculator": "https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1780795082649-85902.report.html",
+  "http://localhost:3000/health/calorie-calculator": "https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1780795083813-88282.report.html",
+  "http://localhost:3000/blog/how-to-calculate-mortgage-payments": "https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1780795084921-82128.report.html"
+}

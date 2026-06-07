@@ -11,7 +11,9 @@ import {
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { getFeaturedCalculators } from "@/lib/calculators";
+import { getFeaturedTools } from "@/lib/tools";
+import { getCategory } from "@/lib/categories";
+import { toolPath } from "@/lib/urls";
 
 const iconMap: Record<string, React.ReactNode> = {
   Home: <Home className="h-6 w-6" />,
@@ -24,7 +26,7 @@ const iconMap: Record<string, React.ReactNode> = {
 };
 
 export function FeaturedCalculators() {
-  const featured = getFeaturedCalculators();
+  const featured = getFeaturedTools();
 
   return (
     <section className="py-16 bg-muted/30">
@@ -44,7 +46,7 @@ export function FeaturedCalculators() {
           {featured.map((calc) => (
             <Link
               key={calc.slug}
-              href={`/${calc.categorySlug}/${calc.slug}`}
+              href={toolPath(calc.category, calc.slug)}
             >
               <Card className="h-full hover:shadow-lg transition-all hover:-translate-y-1 group overflow-hidden">
                 <CardContent className="p-6">
@@ -52,7 +54,7 @@ export function FeaturedCalculators() {
                     <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
                       {iconMap[calc.icon] || <Calculator className="h-6 w-6" />}
                     </div>
-                    <Badge variant="outline">{calc.category}</Badge>
+                    <Badge variant="outline">{getCategory(calc.category)?.name ?? calc.category}</Badge>
                   </div>
                   <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
                     {calc.name}

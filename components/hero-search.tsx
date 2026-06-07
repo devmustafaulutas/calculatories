@@ -4,19 +4,22 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { searchCalculators, Calculator } from "@/lib/calculators";
+import { getCategory } from "@/lib/categories";
+import { searchTools } from "@/lib/tools";
+import type { Tool } from "@/lib/tools";
+import { toolPath } from "@/lib/urls";
 import Link from "next/link";
 
 export function HeroSearch() {
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState<Calculator[]>([]);
+  const [results, setResults] = useState<Tool[]>([]);
   const [isFocused, setIsFocused] = useState(false);
   const router = useRouter();
 
   const handleSearch = (value: string) => {
     setQuery(value);
     if (value.length > 1) {
-      setResults(searchCalculators(value));
+      setResults(searchTools(value));
     } else {
       setResults([]);
     }
@@ -25,7 +28,7 @@ export function HeroSearch() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (results.length > 0) {
-      router.push(`/${results[0].categorySlug}/${results[0].slug}`);
+      router.push(toolPath(results[0].category, results[0].slug));
     }
   };
 
@@ -51,13 +54,13 @@ export function HeroSearch() {
           {results.slice(0, 5).map((calc) => (
             <Link
               key={calc.slug}
-              href={`/${calc.categorySlug}/${calc.slug}`}
+              href={toolPath(calc.category, calc.slug)}
               className="flex items-center gap-3 px-4 py-3 hover:bg-accent transition-colors"
             >
               <div className="flex-1">
                 <div className="font-medium">{calc.name}</div>
                 <div className="text-sm text-muted-foreground">
-                  {calc.category}
+                  {getCategory(calc.category)?.name ?? calc.category}
                 </div>
               </div>
             </Link>

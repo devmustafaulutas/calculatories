@@ -1,13 +1,11 @@
-import { Metadata } from "next";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: "Privacy Policy - Calculatories",
   description:
     "Learn how Calculatories protects your privacy. Read our privacy policy to understand how we handle your data.",
-  alternates: {
-    canonical: "https://calculatories.com/privacy-policy",
-  },
-};
+  path: "/privacy-policy",
+});
 
 export default function PrivacyPolicyPage() {
   return (

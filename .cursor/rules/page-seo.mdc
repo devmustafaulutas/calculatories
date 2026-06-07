@@ -1,0 +1,35 @@
+---
+description: SEO metadata and structured-data requirements for calculator page.tsx files
+globs: app/**/page.tsx
+alwaysApply: false
+---
+
+# page.tsx requirements
+
+This is a **Server Component**. Never add `'use client'` here — push interactivity
+into `calculator.tsx`.
+
+## Metadata (`export const metadata` or `generateMetadata`)
+- `title`: `"<Tool> - <benefit> | Calculatories"`. Keep `<title>` and `og:title` consistent.
+- `description`: unique, ~140–160 chars, contains the primary keyword.
+- `alternates.canonical`: `` `${SITE_URL}${path}` `` — non-www, no trailing slash.
+- `openGraph`: `title`, `description`, `url`, `images: [\`${SITE_URL}/og/<slug>.png\`]`.
+  Verify the OG image file actually exists, or generate it dynamically with
+  `next/og` (`opengraph-image.tsx`) so links never 404.
+- `twitter`: **MUST be set per page** (`card: 'summary_large_image'`, `title`,
+  `description`, `images`). Do NOT let pages inherit the homepage Twitter defaults —
+  this is a known bug to avoid.
+
+## JSON-LD (inject via `<script type="application/ld+json">`)
+- `WebApplication`/`SoftwareApplication`: `name`, `description`,
+  `applicationCategory`, `offers` with `price: "0"`.
+- `FAQPage`: `acceptedAnswer.text` MUST be fully populated with the real answer text,
+  mirroring `content.tsx` exactly. Empty/missing answers = no rich result and looks
+  like thin content.
+- `BreadcrumbList`: Home > Category > Tool.
+
+## Layout
+- Calculator widget above the fold, immediately after the H1.
+- `<HeaderAd/>` after the H1, `<InContentAd/>` mid-content, `<SidebarAd/>` in the aside.
+- Render the client `<Calculator/>` and the server `<Content/>`.
+- One H1 only; section headings as H2/H3.

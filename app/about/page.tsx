@@ -1,14 +1,13 @@
-import { Metadata } from "next";
+import Link from "next/link";
 import { Calculator, Users, Target, Shield } from "lucide-react";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: "About Us - Calculatories",
   description:
     "Learn about Calculatories - your trusted source for free online calculators. Our mission is to make complex calculations simple and accessible.",
-  alternates: {
-    canonical: "https://calculatories.com/about",
-  },
-};
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (
@@ -111,9 +110,9 @@ export default function AboutPage() {
           <p>
             Have questions, feedback, or suggestions for new calculators? We
             would love to hear from you. Visit our{" "}
-            <a href="/contact" className="text-primary hover:underline">
+            <Link href="/contact" className="text-primary hover:underline">
               contact page
-            </a>{" "}
+            </Link>{" "}
             to get in touch.
           </p>
         </div>

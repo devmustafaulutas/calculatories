@@ -1,0 +1,24 @@
+---
+description: Client calculator component conventions (logic, UX, a11y)
+globs: app/**/calculator.tsx
+alwaysApply: false
+---
+
+# calculator.tsx requirements
+
+- First line: `'use client'`.
+- **Instant calculation** on input change — NO submit button.
+- Explicit `interface` for props and a typed state shape. No `any`.
+- Validate inputs. Until inputs are valid, show a friendly placeholder message —
+  never render `NaN`, `$NaN`, or `Infinity`.
+- Copy-to-clipboard on the primary result (with an `aria-label`).
+- Metric/Imperial (or relevant unit) toggle when the domain calls for it.
+- Mobile-first layout; include a results breakdown table when it aids understanding
+  (e.g. amortization, macro split).
+- Accessibility: every input has an associated `<label>`, icon-only buttons have
+  `aria-label`, use semantic HTML.
+- Use shadcn/ui primitives (`Input`, `Button`, `Tabs`, `Table`, `Slider`). Keep the
+  component reusable and presentational where possible.
+- Format money/numbers with `Intl.NumberFormat`, not manual string concatenation.
+- Keep heavy math in pure helper functions (easy to unit-test); the component just
+  wires state to UI.

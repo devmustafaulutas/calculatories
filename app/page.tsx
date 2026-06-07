@@ -1,7 +1,16 @@
+import Link from "next/link";
 import { Calculator, CheckCircle, Zap, Shield } from "lucide-react";
 import { HeroSearch } from "@/components/hero-search";
 import { CategoryGrid } from "@/components/category-grid";
 import { FeaturedCalculators } from "@/components/featured-calculators";
+import { buildMetadata } from "@/lib/seo";
+
+export const metadata = buildMetadata({
+  title: "Calculatories - Free Online Calculators",
+  description:
+    "Free online calculators for finance, health, salary, and productivity. Accurate, fast, and easy to use tools for mortgage, BMI, compound interest, and more.",
+  path: "/",
+});
 
 export default function HomePage() {
   return (
@@ -68,12 +77,12 @@ export default function HomePage() {
             results, and completely free forever.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <a
+            <Link
               href="/finance"
               className="inline-flex items-center justify-center rounded-lg bg-background text-foreground px-6 py-3 font-medium hover:bg-background/90 transition-colors"
             >
               Browse All Calculators
-            </a>
+            </Link>
           </div>
         </div>
       </section>

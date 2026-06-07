@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.calculatories.com" }],
+      "destination": "https://calculatories.com/:path*",
+      "permanent": true
+    }
+  ]
+}

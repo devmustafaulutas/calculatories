@@ -1,0 +1,31 @@
+---
+description: SEO content structure and copy standards for calculator content.tsx files
+globs: app/**/content.tsx
+alwaysApply: false
+---
+
+# content.tsx requirements (Server Component)
+
+Body content **≥ 800 words**. US English. Active voice, second person ("you").
+Target Flesch Reading Ease > 60. Original copy — no plagiarism.
+
+## Required sections, in this order
+1. **What is `<X>`?** — 100–150 words. Primary keyword in the first sentence,
+   density ~1–2%.
+2. **How to Use This Calculator** — numbered steps.
+3. **How to Calculate `<X>` Manually** — 400–600 words: formula explanation plus a
+   worked example using real, concrete numbers.
+4. **`<X>` Formula** — a formatted formula block.
+5. **FAQ** — ≥5 Q&A. Answers must be real, complete, and **server-rendered in the
+   DOM** (not injected only on accordion open), and must match the `FAQPage` JSON-LD
+   in `page.tsx` word-for-word.
+6. **Related Calculators** — ≥3 internal links to sibling tools.
+
+## Keyword placement
+Primary keyword appears in the H1, the first paragraph, and at least 3 H2s.
+No keyword stuffing.
+
+## Accordion note
+If FAQ uses a collapsed accordion (shadcn/Radix), the answer text must exist in the
+server-rendered HTML so Googlebot and the schema both see it — do not lazy-render
+answers on click.

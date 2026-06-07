@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Calculator } from "lucide-react";
-import { categories } from "@/lib/calculators";
+import { getAllCategories } from "@/lib/categories";
 
 export function Footer() {
   return (
@@ -25,7 +25,7 @@ export function Footer() {
           <div>
             <h3 className="font-semibold mb-4">Categories</h3>
             <ul className="space-y-2">
-              {categories.map((category) => (
+              {getAllCategories().map((category) => (
                 <li key={category.slug}>
                   <Link
                     href={`/${category.slug}`}
@@ -64,6 +64,22 @@ export function Footer() {
                   className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
                   Contact
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/editorial-policy"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Editorial Policy
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/methodology"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Methodology
                 </Link>
               </li>
             </ul>

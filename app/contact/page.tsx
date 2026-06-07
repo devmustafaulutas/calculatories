@@ -1,19 +1,17 @@
-import { Metadata } from "next";
 import { Mail, MessageSquare, Clock } from "lucide-react";
+import { buildMetadata } from "@/lib/seo";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: "Contact Us - Calculatories",
   description:
     "Get in touch with Calculatories. Questions, feedback, or suggestions? We would love to hear from you.",
-  alternates: {
-    canonical: "https://calculatories.com/contact",
-  },
-};
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (

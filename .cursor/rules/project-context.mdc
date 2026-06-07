@@ -1,0 +1,44 @@
+---
+description: Core project context for Calculatories.com — stack, structure, conventions
+alwaysApply: true
+---
+
+# Calculatories.com — Project Context
+
+Programmatic + editorial calculator site targeting US/UK/CA/AU traffic.
+Monetized via Google AdSense (→ future SaaS pivot). Every public page must be
+SEO-grade and ad-ready. Treat each page as a landing page that has to rank.
+
+## Stack
+- Next.js 14 (App Router), TypeScript **strict**, Tailwind CSS, shadcn/ui
+- Hosting: Vercel
+- No `any`. Every component has an explicit props `interface`. ESLint + Prettier clean.
+- Prefer Server Components; only mark `'use client'` where interactivity requires it.
+
+## Canonical host (CRITICAL — do not mix)
+- Single source of truth: `const SITE_URL = "https://calculatories.com"` (NO www).
+- Use `SITE_URL` for `metadataBase`, every `canonical`, every `og:url`, and `sitemap.xml`.
+- The Vercel redirect must send `www → non-www`. If you instead choose www as primary,
+  flip ALL of the above to www — but never serve one host while canonicalizing the other.
+
+## File structure per calculator
+```
+app/[category]/[slug]/
+  page.tsx        # Server: metadata + JSON-LD + layout + ad slots
+  calculator.tsx  # 'use client': inputs + instant calc logic
+  content.tsx     # Server: What is / How to / formula / FAQ / related
+```
+
+## Categories
+`finance`, `health`, `salary`, `tools`, `legal`, `productivity`
+
+## Every page ships with
+- Unique `<title>`, description, canonical, **per-page** OpenGraph AND Twitter meta
+- JSON-LD: `WebApplication`/`SoftwareApplication` + `FAQPage` + `BreadcrumbList`
+- Ad slots: `<HeaderAd/>`, `<InContentAd/>`, `<SidebarAd/>`
+- ≥3 internal links, ≥800 words of body content, ≥1 formula or table
+- Mobile-first; Core Web Vitals targets: LCP < 2.5s, CLS < 0.1
+
+## Locale
+US-first: USD default, imperial units with a metric toggle where relevant,
+US spelling (`color`, not `colour`), current-year references kept up to date.

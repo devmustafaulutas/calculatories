@@ -13,6 +13,8 @@ import {
   Heart,
   Briefcase,
   Clock,
+  Wrench,
+  Scale,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -23,26 +25,31 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { categories, searchCalculators } from "@/lib/calculators";
+import { getAllCategories } from "@/lib/categories";
+import { searchTools } from "@/lib/tools";
+
+const categories = getAllCategories();
 
 const iconMap: Record<string, React.ReactNode> = {
   DollarSign: <DollarSign className="h-4 w-4" />,
   Heart: <Heart className="h-4 w-4" />,
   Briefcase: <Briefcase className="h-4 w-4" />,
   Clock: <Clock className="h-4 w-4" />,
+  Wrench: <Wrench className="h-4 w-4" />,
+  Scale: <Scale className="h-4 w-4" />,
 };
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState<ReturnType<typeof searchCalculators>>([]);
+  const [searchResults, setSearchResults] = useState<ReturnType<typeof searchTools>>([]);
   const router = useRouter();
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
     if (query.length > 1) {
-      setSearchResults(searchCalculators(query));
+      setSearchResults(searchTools(query));
     } else {
       setSearchResults([]);
     }
@@ -51,7 +58,7 @@ export function Header() {
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchResults.length > 0) {
-      router.push(`/${searchResults[0].categorySlug}/${searchResults[0].slug}`);
+      router.push(`/${searchResults[0].category}/${searchResults[0].slug}`);
       setSearchOpen(false);
       setSearchQuery("");
       setSearchResults([]);
@@ -136,7 +143,7 @@ export function Header() {
                       {searchResults.slice(0, 5).map((result) => (
                         <Link
                           key={result.slug}
-                          href={`/${result.categorySlug}/${result.slug}`}
+                          href={`/${result.category}/${result.slug}`}
                           className="block py-2 hover:text-primary transition-colors"
                           onClick={() => {
                             setSearchOpen(false);
@@ -192,7 +199,7 @@ export function Header() {
                   {searchResults.slice(0, 3).map((result) => (
                     <Link
                       key={result.slug}
-                      href={`/${result.categorySlug}/${result.slug}`}
+                      href={`/${result.category}/${result.slug}`}
                       className="block py-2"
                       onClick={() => {
                         setMobileMenuOpen(false);
