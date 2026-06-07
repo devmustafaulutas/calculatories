@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { AdSenseScript } from "@/components/ads/AdSenseScript";
 import { ConsentBanner } from "@/components/consent/ConsentBanner";
@@ -19,8 +18,6 @@ import { organization, website } from "@/lib/schema";
 import { projectId } from "@/sanity/lib/client";
 import { SanityLive } from "@/sanity/lib/live";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -78,7 +75,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning className="bg-background">
-      <body className={`${inter.variable} font-sans antialiased`}>
+      <body className="font-sans antialiased">
         <JsonLd
           data={[
             organization({
